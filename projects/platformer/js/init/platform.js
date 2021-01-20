@@ -28,6 +28,10 @@
 
         ////////////////////////////////////////////////////////////////////////
         // ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
+        createPlatform(100, 100);
+        createPlatform(500, 500);
+        createPlatform(50, 600, 0.3);
+       
         
         /*
          * ground : here, we create a floor. Given the width of of the platform 
