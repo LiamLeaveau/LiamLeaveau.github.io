@@ -27,11 +27,94 @@ var level01 = function (window) {
 
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
+        function createSawBlade(x, y){      
+            var hitZoneSize = 25;
+            var damageFromObstacle = 10;  
+            var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+            sawBladeHitZone.x = x;
+            sawBladeHitZone.y = y;
+            game.addGameItem(sawBladeHitZone);    
+            var obstacleImage = draw.bitmap('img/sawblade.png');
+            sawBladeHitZone.addChild(obstacleImage);
+            obstacleImage.x = -25
+            obstacleImage.y = -25
+    }
+        createSawBlade(400, 350);
+        createSawBlade(800, 450);
+        createSawBlade(1000, 350)
 
-        
-        
-        
-        // DO NOT EDIT CODE BELOW HERE
+        function createWater(x,y) {
+            var hitZoneSize = 35;
+           
+                var damageFromObstacle = 20;
+                var waterHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+                waterHitZone.x = x;
+                waterHitZone.y = y;
+                game.addGameItem(waterHitZone);    
+                var obstacleImage = draw.bitmap('img/water.jpg');
+                waterHitZone.addChild(obstacleImage);
+                obstacleImage.x = -35
+                obstacleImage.y = -35
+                obstacleImage.scaleX = .25;
+                obstacleImage.scaleY = .45;
+        };
+        createWater(1300, 450);
+
+
+function createEnemy(x, y) {
+    var enemy = game.createGameItem('enemy',25);
+        var blueSquare = draw.rect(50,50,'blue');
+        blueSquare.x = -25;
+        blueSquare.y = -25;
+        enemy.addChild(blueSquare);
+        enemy.x = x;
+        enemy.y = y;
+        game.addGameItem(enemy);
+        enemy.velocityX = -1;
+        enemy.rotationalVelocity = 10
+        enemy.onPlayerCollision = function() {
+            console.log('The enemy has hit Halle');
+            game.changeIntegrity(-10);
+            enemy.fadeOut();
+        }
+        enemy.onProjectileCollision = function(){
+            console.log('Halle has hit the enemy');
+            game.increaseScore(100);
+            enemy.shrink();
+        }
+};
+
+
+
+
+createEnemy(400,groundY-20);
+createEnemy(1200,groundY-110);
+createEnemy(800,groundY-50);
+
+
+function createReward(x, y){
+    var reward = game.createGameItem('reward', 25); 
+    var hitZoneSize = 35;   
+    var greenCircle = draw.ellipse(50,50,'green');
+        greenCircle.x = -25;
+        greenCircle.y = -25;
+        reward.addChild(greenCircle);
+        reward.x = x;
+        reward.y = y;
+        game.addGameItem(reward);
+        reward.velocityX = -1;
+        reward.onPlayerCollision = function(){
+            console.log('Halle has gained a reward');
+            game.changeIntegrity(20);
+            reward.fadeOut();
+
+        }
+}
+
+createReward(600, groundY - 50);
+
+
+// DO NOT EDIT CODE BELOW HERE
     }
 };
 
