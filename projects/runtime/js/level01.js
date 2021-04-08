@@ -19,8 +19,32 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 400, "y": groundY },
                 { "type": "sawblade", "x": 600, "y": groundY },
                 { "type": "sawblade", "x": 900, "y": groundY },
-            ]
+                { "type": "enemy", "x": 400, "y": groundY-20},
+                { "type": "enemy", "x": 1200, "y": groundY-110},
+                { "type": "enemy", "x": 800, "y": groundY-50},
+                { "type": "water", "x": 1300, "y": 450},
+                { "type": "reward", "x": 600, "y": groundY - 50}
+           
+            ] 
         };
+
+        for (var i = 0; i < levelData.gameItems.length; i++){
+            obj = levelData.gameItems[i];
+            objX = obj.x;
+            objY = obj.y;
+            objType = obj.type;
+            if (objType === "sawblade"){
+                createSawBlade(objX, objY);
+            } else if (objType === "enemy"){
+                createEnemy(objX, objY);
+            } else if (objType === "water"){
+                createWater(objX, objY);
+            } else if (objType === "reward"){
+                createReward(objX, objY);
+            }
+
+        }
+
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
         game.setDebugMode(true);
@@ -39,10 +63,7 @@ var level01 = function (window) {
             obstacleImage.x = -25
             obstacleImage.y = -25
     }
-        createSawBlade(400, 350);
-        createSawBlade(800, 450);
-        createSawBlade(1000, 350)
-
+      
         function createWater(x,y) {
             var hitZoneSize = 35;
            
@@ -58,7 +79,7 @@ var level01 = function (window) {
                 obstacleImage.scaleX = .25;
                 obstacleImage.scaleY = .45;
         };
-        createWater(1300, 450);
+ 
 
 
 function createEnemy(x, y) {
@@ -87,18 +108,15 @@ function createEnemy(x, y) {
 
 
 
-createEnemy(400,groundY-20);
-createEnemy(1200,groundY-110);
-createEnemy(800,groundY-50);
 
 
 function createReward(x, y){
     var reward = game.createGameItem('reward', 25); 
     var hitZoneSize = 35;   
-    var greenCircle = draw.ellipse(50,50,'green');
-        greenCircle.x = -25;
-        greenCircle.y = -25;
-        reward.addChild(greenCircle);
+    var redSquare = draw.rect(50,50,'red');
+        redSquare.x = -25;
+        redSquare.y = -25;
+        reward.addChild(redSquare);
         reward.x = x;
         reward.y = y;
         game.addGameItem(reward);
@@ -111,7 +129,6 @@ function createReward(x, y){
         }
 }
 
-createReward(600, groundY - 50);
 
 
 // DO NOT EDIT CODE BELOW HERE
