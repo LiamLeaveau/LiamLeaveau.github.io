@@ -20,10 +20,10 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 600, "y": groundY },
                 { "type": "sawblade", "x": 900, "y": groundY },
                 { "type": "enemy", "x": 400, "y": groundY-20},
-                { "type": "enemy", "x": 1200, "y": groundY-110},
+                { "type": "enemy", "x": 1200, "y": groundY-60},
                 { "type": "enemy", "x": 800, "y": groundY-50},
-                { "type": "water", "x": 1300, "y": 450},
-                { "type": "reward", "x": 600, "y": groundY - 50}
+                { "type": "water", "x": 1300, "y": groundY},
+                { "type": "reward", "x": 600, "y": groundY - 100}
            
             ] 
         };
@@ -126,6 +126,9 @@ function createReward(x, y){
             game.changeIntegrity(20);
             reward.fadeOut();
 
+        }
+        reward.onProjectileCollision = function(){
+            
         }
 }
 
