@@ -82,55 +82,59 @@ var level01 = function (window) {
  
 
 
-function createEnemy(x, y) {
-    var enemy = game.createGameItem('enemy',25);
-        var blueSquare = draw.rect(50,50,'blue');
-        blueSquare.x = -25;
-        blueSquare.y = -25;
-        enemy.addChild(blueSquare);
-        enemy.x = x;
-        enemy.y = y;
-        game.addGameItem(enemy);
-        enemy.velocityX = -1;
-        enemy.rotationalVelocity = 10
-        enemy.onPlayerCollision = function() {
-            console.log('The enemy has hit Halle');
-            game.changeIntegrity(-10);
-            enemy.fadeOut();
+        function createEnemy(x, y) {
+            var enemy = game.createGameItem('enemy',25);
+                var creeper = draw.bitmap('img/creeper.jpg');
+                creeper.x = -25;
+                creeper.y = -25;
+                creeper.scaleX = .2;
+                creeper.scaleY = .2;
+                enemy.addChild(creeper);
+                enemy.x = x;
+                enemy.y = y;
+                game.addGameItem(enemy);
+                enemy.velocityX = -1;
+                enemy.rotationalVelocity = 10
+                enemy.onPlayerCollision = function() {
+                    console.log('The enemy has hit Halle');
+                    game.changeIntegrity(-10);
+                    enemy.fadeOut();
+                }
+                enemy.onProjectileCollision = function(){
+                    console.log('Halle has hit the enemy');
+                    game.increaseScore(100);
+                    enemy.shrink();
+                }
+        };
+
+
+
+
+
+
+        function createReward(x, y){
+            var reward = game.createGameItem('reward', 25); 
+            var wrench = draw.bitmap('img/wrench.jpg');
+            var hitZoneSize = 35;   
+                wrench.x = -25;
+                wrench.y = -25;
+                wrench.scaleX = .2;
+                wrench.scaleY = .2;
+                reward.addChild(wrench);
+                reward.x = x;
+                reward.y = y;
+                game.addGameItem(reward);
+                reward.velocityX = -1;
+                reward.onPlayerCollision = function(){
+                    console.log('Halle has gained a reward');
+                    game.changeIntegrity(20);
+                    reward.fadeOut();
+
+                }
+                reward.onProjectileCollision = function(){
+                    
+                }
         }
-        enemy.onProjectileCollision = function(){
-            console.log('Halle has hit the enemy');
-            game.increaseScore(100);
-            enemy.shrink();
-        }
-};
-
-
-
-
-
-
-function createReward(x, y){
-    var reward = game.createGameItem('reward', 25); 
-    var hitZoneSize = 35;   
-    var redSquare = draw.rect(50,50,'red');
-        redSquare.x = -25;
-        redSquare.y = -25;
-        reward.addChild(redSquare);
-        reward.x = x;
-        reward.y = y;
-        game.addGameItem(reward);
-        reward.velocityX = -1;
-        reward.onPlayerCollision = function(){
-            console.log('Halle has gained a reward');
-            game.changeIntegrity(20);
-            reward.fadeOut();
-
-        }
-        reward.onProjectileCollision = function(){
-            
-        }
-}
 
 
 
