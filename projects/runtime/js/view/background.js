@@ -26,7 +26,7 @@ var background = function (window) {
         var background;
         
         // ANIMATION VARIABLES HERE:
-        var tree
+        var steve
         var building;
         var buildings = [];
 
@@ -73,10 +73,13 @@ var background = function (window) {
 
             
             // TODO 4: Part 1 - Add a tree
-            tree = draw.bitmap('img/tree.png');
-            tree.x = 600;
-            tree.y = groundY - 250;
-            background.addChild(tree);
+            steve = draw.bitmap('img/SteveMinecraft.png');
+            steve.x = 2000;
+            steve.y = groundY - 250;
+            background.addChild(steve);
+            steve.scaleX = 0.25;
+            steve.scaleY = 0.25;
+
             
         } // end of render function - DO NOT DELETE
         
@@ -90,11 +93,8 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            tree.x = tree.x - 3;
+            steve.x = steve.x - 3;
 
-            if (tree.x < -200) {
-                tree.x = canvasWidth;
-            }
 
              for (var i = 0; i < buildings.length; i++) {
                building = buildings[i];
